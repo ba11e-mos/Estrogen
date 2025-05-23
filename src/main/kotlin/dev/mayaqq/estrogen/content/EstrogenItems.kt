@@ -107,7 +107,7 @@ object EstrogenItems : Registrar<Item> by Estrogen..Registries.ITEM {
         properties {
             stacksTo(1)
         }
-        /* TODO:
+        /*
         tooltip {
             TODO("TOOLTIP hehe")
         }
