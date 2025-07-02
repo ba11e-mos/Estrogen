@@ -113,6 +113,7 @@ cloche {
         runs {
             client()
             server()
+            data()
         }
 
         metadata {
@@ -188,38 +189,13 @@ cloche {
                 adapter.set("kotlin")
                 value.set("dev.mayaqq.estrogen.compat.jei.JeiEstrogenPlugin")
             }
-        }
-    }
-
-    fabric("datagen") {
-        loaderVersion = libs.versions.fabric
-        minecraftVersion = libs.versions.minecraft
-
-        dependencies {
-            fabricApi(libs.versions.fapi)
-            modApi(libs.fabric.kotlin)
-            modApi.bundle(libs.bundles.fabric.cardinalComponents)
-            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
-            modImplementation(libs.fabric.trinkets)
-            modCompileOnly(libs.fabric.emi)
-            modCompileOnly(libs.fabric.rei)
-            modCompileOnly(libs.fabric.jei)
-            modImplementation(libs.fabric.modmenu)
-            modCompileOnly(libs.fabric.iris)
-            modCompileOnlyApi(libs.fabric.flywheel.api)
-            modImplementation(libs.fabric.flywheel)
-            modApi(libs.fabric.cynosure)
-            modApi(libs.fabric.kritter)
-            modApi(libs.fabric.kittyconfig)
+            entrypoint("fabric-datagen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.estrogen.datagen.EstrogenDatagen")
+            }
         }
 
         data {
-
-        }
-
-        runs {
-            data()
-            clientData()
         }
     }
 
