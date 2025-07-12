@@ -93,6 +93,8 @@ cloche {
             modCompileOnly(libs.cynosure)
 
             implementation(libs.mixinConstrains)
+
+            implementation(libs.resourcefulcosmetics)
         }
     }
 
@@ -109,6 +111,8 @@ cloche {
         include(libs.fabric.kittyconfig)
 
         include(libs.mixinConstrains)
+
+        include(libs.resourcefulcosmetics)
 
         includedClient() // includedClient() is not a run
         runs {
@@ -215,6 +219,8 @@ cloche {
         include(libs.forge.mixinExtras)
         include(libs.forge.kritter)
         include(libs.mixinConstrains)
+
+        include(libs.resourcefulcosmetics)
 
         metadata {
             blurLogo = false

@@ -28,7 +28,7 @@ baubly = "1.0.1"
 resourcefullib = "2.1.29"
 botarium = "2.3.3"
 new_age = "1.1.2"
-resourceful_cosmetics = "1.0.4"
+resourcefulcosmetics = "1.0.4"
 critter = "0.1-beta.14"
 skinlayers = "5edNc5ga"
 cobblemon = "1.5.2+1.20.1"
@@ -73,6 +73,7 @@ cynosure = { module = "dev.mayaqq.cynosure:cynosure-common", version.ref = "cyno
 kittyconfig = { module = "uwu.serenity.kittyconfig:kittyconfig-minecraft-common", version.ref = "kittyconfig-mc" }
 kittyconfig-ksp = { module = "uwu.serenity.kittyconfig:kittyconfig-ksp", version.ref = "kittyconfig-ksp" }
 mixinConstrains = { module = "com.moulberry:mixinconstraints", version.ref = "mixin_constrains" }
+resourcefulcosmetics = { module = "com.teamresourceful:resourceful-cosmetics-4j", version.ref = "resourcefulcosmetics" }
 
 # Fabric dependencies
 fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
