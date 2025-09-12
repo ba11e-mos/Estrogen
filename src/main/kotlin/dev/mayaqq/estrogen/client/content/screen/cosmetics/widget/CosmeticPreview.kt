@@ -1,17 +1,17 @@
 package dev.mayaqq.estrogen.client.content.screen.cosmetics.widget
 
-import dev.mayaqq.cynosure.helpers.McFont
+import dev.mayaqq.cynosure.helpers.McClient
 import dev.mayaqq.cynosure.text.CommonText
 import dev.mayaqq.cynosure.text.unaryMinus
 import dev.mayaqq.estrogen.client.content.screen.EstrogenButton
 import dev.mayaqq.estrogen.client.content.screen.EstrogenMenuScreen
+import dev.mayaqq.estrogen.features.fake.FakePlayer
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.InventoryScreen
 import net.minecraft.util.Mth
-import net.minecraft.world.entity.player.Player
 import org.joml.Quaternionf
 
-class CosmeticPreview(val player: Player?, x: Int, y: Int, width: Int, height: Int) : EstrogenButton(
+class CosmeticPreview(x: Int, y: Int, width: Int, height: Int) : EstrogenButton(
     x, y, width, height,
     arrayOf(),
     OnPress {},
@@ -26,32 +26,31 @@ class CosmeticPreview(val player: Player?, x: Int, y: Int, width: Int, height: I
         super.renderWidget(graphics, mouseX, mouseY, partialTick)
 
         if (this.message == CommonText.EMPTY) this.message = -"gui.estrogen.cosmetics.no_preview"
-        if (player != null) {
+        var og = McClient.player
+        McClient.player = fakePlayer
 
-            val quaternion = Quaternionf().rotateZ(Mth.PI).rotateY(rotation)
-            val yHeadRot: Float = player.yBodyRot
-            val yRot: Float = player.yRot
-            val xRot: Float = player.xRot
-            val yHeadRotO: Float = player.yHeadRotO
-            val yBodyRot: Float = player.yHeadRot
-            player.yBodyRot = 180.0f
-            player.yRot = 180.0f
-            player.xRot = 0f
-            player.yHeadRot = player.yRot
-            player.yHeadRotO = player.yRot
-            InventoryScreen.renderEntityInInventory(
-                graphics,
-                (x + getWidth() / 2f).toInt(), y + getHeight() - 20,
-                (getHeight() / 2.5f).toInt(), quaternion, null, player
-            )
-            player.yBodyRot = yHeadRot
-            player.yRot = yRot
-            player.xRot = xRot
-            player.yHeadRot = yHeadRotO
-            player.yHeadRotO = yBodyRot
-        } else {
-            this.renderString(graphics, McFont, 0xFFFFFF)
-        }
+        val quaternion = Quaternionf().rotateZ(Mth.PI).rotateY(rotation)
+        val yHeadRot: Float = fakePlayer.yBodyRot
+        val yRot: Float = fakePlayer.yRot
+        val xRot: Float = fakePlayer.xRot
+        val yHeadRotO: Float = fakePlayer.yHeadRotO
+        val yBodyRot: Float = fakePlayer.yHeadRot
+        fakePlayer.yBodyRot = 180.0f
+        fakePlayer.yRot = 180.0f
+        fakePlayer.xRot = 0f
+        fakePlayer.yHeadRot = fakePlayer.yRot
+        fakePlayer.yHeadRotO = fakePlayer.yRot
+        InventoryScreen.renderEntityInInventory(
+            graphics,
+            (x + getWidth() / 2f).toInt(), y + getHeight() - 20,
+            (getHeight() / 2.5f).toInt(), quaternion, null, McClient.player
+        )
+        fakePlayer.yBodyRot = yHeadRot
+        fakePlayer.yRot = yRot
+        fakePlayer.xRot = xRot
+        fakePlayer.yHeadRot = yHeadRotO
+        fakePlayer.yHeadRotO = yBodyRot
+        McClient.player = og
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean = isMouseOver(mouseX, mouseY) && isValidClickButton(button)
@@ -60,5 +59,9 @@ class CosmeticPreview(val player: Player?, x: Int, y: Int, width: Int, height: I
     override fun mouseDragged(d: Double, e: Double, i: Int, f: Double, g: Double): Boolean {
         this.rotation += f.toFloat() * 0.15f
         return true
+    }
+
+    companion object {
+        val fakePlayer = FakePlayer.create(McClient.user.gameProfile)
     }
 }

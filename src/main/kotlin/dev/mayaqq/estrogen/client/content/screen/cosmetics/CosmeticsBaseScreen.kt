@@ -21,7 +21,7 @@ open class CosmeticsBaseScreen(previous: Screen?, title: Component, val ableToCl
 
     override fun baseInit() {
         val fakeThirdWidth = (width - 30) / 3
-        CosmeticPreview(McPlayer, 10, 10, fakeThirdWidth, height - 55).add()
+        CosmeticPreview(10, 10, fakeThirdWidth, height - 55).add()
         rTitle.bounds(20 + fakeThirdWidth, 10, fakeThirdWidth * 2, 25).build().addRenderable()
         bClaimCosmetics.bounds(10, height - 35, fakeThirdWidth, 25)
         if (!ableToClaim) bClaimCosmetics.disabled(true)
